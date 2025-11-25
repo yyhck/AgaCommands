@@ -52,25 +52,23 @@ O comando base é `/agacommands` (ou os atalhos `/aga`, `/acmd`) porém você po
 
 ```yaml
 # AgaCommands - Configuração
-
 # Aliases para o comando principal
 main-command-aliases:
   - agacommands
   - hcommands
 
 messages:
-  reload: "&a&l[AgaCommands] &fConfiguração recarregada com sucesso!"
-  blocked-command: "&c&lERRO! &fComando desconhecido ou inexistente."
-  no-permission: "&c&lERRO! &fVocê não tem permissão para gerenciar o AgaCommands."
+  reload: "&fAga&bCommands &8- &fConfiguração recarregada com sucesso!"
+  blocked-command: "&cComando desconhecido ou inexistente."
+  no-permission: "&cVocê não tem permissão para fazer isso."
 
   help:
-    - "&e&m--------------------------------"
-    - "&6&lAgaCommands &f- &7Ajuda"
     - ""
-    - "&f/aga reload &7- Recarrega a configuração."
-    - "&f/aga <comando> <atalho> &7- Cria um atalho."
+    - "&f Aga&bCommands &8- &7Lista de Comandos &c(STAFF)"
     - ""
-    - "&e&m--------------------------------"
+    - "&8 ➡ &f/agacommands reload &8- &7Recarrega a configuração."
+    - "&8 ➡ &f/agacommands <comando> <atalho> &8- &7Cria um atalho."
+    - ""
 
 aliases:
   voar: fly
