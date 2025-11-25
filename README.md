@@ -14,7 +14,7 @@
 
 - **🚀 Alias Dinâmico:** Crie atalhos para comandos longos (ex: `/loja` -> `/server loja`) diretamente pelo jogo ou config.
 - **🔒 Bloqueador de Comandos:** Impeça que jogadores vejam seus plugins ou segredos (`/pl`, `/about`, `/ver`).
-- **tab 🚫 Anti-Tab Inteligente:** Bloqueia o `TAB` para tudo, exceto comandos na Whitelist (como `/tpa`, `/tell`).
+- **🚫 Anti-Tab Inteligente:** Bloqueia o `TAB` para tudo, exceto comandos na Whitelist (como `/tpa`, `/tell`).
 - **⚡ Logs Assíncronos:** Sistema de registro de tentativas de comandos proibidos que roda em thread separada (sem lag).
 - **🎨 100% Configurável:** Todas as mensagens, listas e permissões são editáveis.
 
@@ -24,27 +24,27 @@
 
 1. Baixe o arquivo `AgaCommands-1.0.jar` na aba [Releases].
 2. Coloque o arquivo na pasta `/plugins/` do seu **Waterfall** ou **BungeeCord**.
-3. Reinicie o Proxy.
-4. Configure o arquivo `config.yml` conforme sua necessidade.
+3. Reinicie o seu Proxy.
+4. Configure o arquivo `config.yml` conforme a sua necessidade.
 
 ---
 
 ## 🛠️ Comandos e Permissões
 
 ### Comando Principal
-O comando base é `/agacommands` (ou os atalhos `/aga`, `/acmd`).
+O comando base é `/agacommands` (ou os atalhos `/aga`, `/acmd`) porém você pode alterar como preferir.
 
 | Comando | Descrição | Permissão |
 | :--- | :--- | :--- |
 | `/aga reload` | Recarrega as configurações e mensagens. | `agacommands.admin` |
 | `/aga <comando> <atalho>` | Cria um novo atalho in-game. | `agacommands.admin` |
-| `/aga` | Mostra a lista de ajuda. | Nenhuma |
+| `/aga` | Mostra a lista de ajuda. | `agacommands.admin` |
 
 ### Permissões Especiais
 
 - **`agacommands.admin`**: 
   - Acesso total aos comandos de administração.
-  - **Bypass:** Permite ver plugins (`/pl`), usar TAB livremente e executar comandos bloqueados.
+  - **Bypass:** Permite ver conteúdos (`/pl`), usar TAB livremente e executar comandos bloqueados.
 
 ---
 
