@@ -3,7 +3,7 @@
 > O gerenciador de comandos e segurança definitivo para redes Waterfall/BungeeCord.
 
 ![Version](https://img.shields.io/badge/version-1.0-blue)
-![Java](https://img.shields.io/badge/java-8+-orange)
+![Java](https://img.shields.io/badge/java-8-orange)
 ![Author](https://img.shields.io/badge/author-yyHcK-purple)
 
 **AgaCommands** é uma solução leve e otimizada desenvolvida para gerenciar atalhos de comandos, bloquear sintaxes indesejadas e proteger a lista de plugins do seu servidor em modo Proxy, tudo isso com zero impacto na performance.
