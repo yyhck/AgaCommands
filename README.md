@@ -53,31 +53,24 @@ O comando base é `/agacommands` (ou os atalhos `/aga`, `/acmd`) porém você po
 ```yaml
 # AgaCommands - Configuração
 
-# Aliases para o comando principal de admin
+# Aliases para o comando principal
 main-command-aliases:
   - agacommands
-  - aga
-  - acmd
+  - hcommands
 
 messages:
   reload: "&a&l[AgaCommands] &fConfiguração recarregada com sucesso!"
   blocked-command: "&c&lERRO! &fComando desconhecido ou inexistente."
   no-permission: "&c&lERRO! &fVocê não tem permissão para gerenciar o AgaCommands."
+
   help:
     - "&e&m--------------------------------"
     - "&6&lAgaCommands &f- &7Ajuda"
+    - ""
     - "&f/aga reload &7- Recarrega a configuração."
     - "&f/aga <comando> <atalho> &7- Cria um atalho."
+    - ""
     - "&e&m--------------------------------"
-
-# Configurações do Anti-Tab
-tab-settings:
-  enabled: true
-  # Comandos permitidos no TAB (Whitelist)
-  allowed-commands:
-    - "/tpa"
-    - "/tell"
-    - "/spawn"
 
 aliases:
   voar: fly
@@ -87,4 +80,20 @@ blocked-commands:
   - "/pl"
   - "/plugins"
   - "/ver"
-  - "/icanhasbukkit"
+  - "/version"
+  - "/about"
+
+# Sistema de Anti-Tab
+tab-settings:
+  enabled: true
+
+  # Lista de comandos onde o TAB será PERMITIDO (Whitelist)
+  # Coloque apenas o início do comando.
+  allowed-commands:
+    - "/tpa"
+    - "/tpaccept"
+    - "/tell"
+    - "/msg"
+    - "/g"
+    - "/l"
+    - "/money"
