@@ -34,14 +34,11 @@ public class AgaCommands extends Plugin {
     public void onEnable() {
         instance = this;
 
-        // 1. Carrega configurações
         reloadPlugin(null);
 
-        // 2. Registra os Eventos (Listeners)
         getProxy().getPluginManager().registerListener(this, new CommandBlockerListener(this));
         getProxy().getPluginManager().registerListener(this, new TabBlockerListener(this));
 
-        // 3. Envia mensagem bonita no console
         sendConsoleLogo();
     }
 
@@ -67,7 +64,6 @@ public class AgaCommands extends Plugin {
         loadConfig();
         createLogFile();
 
-        // Limpa comandos antigos para evitar duplicatas e registra novamente
         getProxy().getPluginManager().unregisterCommands(this);
 
         registerAdminCommand();

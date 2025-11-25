@@ -22,10 +22,8 @@ public class AliasCommand extends Command {
         }
 
         if (sender instanceof ProxiedPlayer) {
-            // Executa como se o jogador tivesse digitado
             ((ProxiedPlayer) sender).chat("/" + cmdLine.toString());
         } else {
-            // Executa pelo console do proxy
             AgaCommands.getInstance().getProxy().getPluginManager().dispatchCommand(sender, cmdLine.toString());
         }
     }

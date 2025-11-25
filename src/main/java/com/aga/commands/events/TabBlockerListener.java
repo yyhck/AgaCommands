@@ -19,7 +19,6 @@ public class TabBlockerListener implements Listener {
 
     @EventHandler
     public void onTab(TabCompleteEvent event) {
-        // Se a função estiver desativada na config, ignora
         if (!plugin.getConfig().getBoolean("tab-settings.enabled")) return;
 
         if (!(event.getSender() instanceof ProxiedPlayer)) return;
@@ -30,14 +29,12 @@ public class TabBlockerListener implements Listener {
 
         String cursor = event.getCursor().toLowerCase();
 
-        // Se não começa com barra, é chat normal, deixa passar
         if (!cursor.startsWith("/")) return;
 
         List<String> allowed = plugin.getConfig().getStringList("tab-settings.allowed-commands");
         boolean isAllowed = false;
 
         for (String cmd : allowed) {
-            // Verifica se o que o player digitou começa com algum comando permitido
             if (cursor.startsWith(cmd.toLowerCase())) {
                 isAllowed = true;
                 break;

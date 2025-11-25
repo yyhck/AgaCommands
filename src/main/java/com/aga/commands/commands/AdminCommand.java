@@ -1,6 +1,7 @@
 package com.aga.commands.commands;
 
 import com.aga.commands.AgaCommands;
+
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.chat.TextComponent;
@@ -13,7 +14,6 @@ public class AdminCommand extends Command {
     private final AgaCommands plugin;
 
     public AdminCommand(AgaCommands plugin, String name, String[] aliases) {
-        // null na permissão para controle manual da mensagem
         super(name, null, aliases);
         this.plugin = plugin;
     }
@@ -39,8 +39,12 @@ public class AdminCommand extends Command {
                 break;
 
             default:
-                if (args.length >= 2) {
-                    createAlias(sender, args[0], args[1]);
+                if (args.length >= 3) {
+                    if (args.length >= 2) {
+                        createAlias(sender, args[0], args[1]);
+                    } else {
+                        sendHelp(sender);
+                    }
                 } else {
                     sendHelp(sender);
                 }
@@ -53,8 +57,6 @@ public class AdminCommand extends Command {
         if (alias.startsWith("/")) alias = alias.substring(1);
 
         plugin.addAliasToConfig(alias, original);
-
-        // Registra o novo alias imediatamente
         plugin.getProxy().getPluginManager().registerCommand(plugin, new AliasCommand(alias, original));
 
         sender.sendMessage(new TextComponent(ChatColor.GREEN + "Atalho " + ChatColor.YELLOW + "/" + alias +

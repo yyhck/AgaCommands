@@ -30,7 +30,6 @@ public class CommandBlockerListener implements Listener {
         if (player.hasPermission("agacommands.admin")) return;
 
         String message = event.getMessage();
-        // Pega apenas a primeira parte (ex: /pl)
         String rootCommand = message.split(" ")[0].toLowerCase();
 
         List<String> blockedList = plugin.getConfig().getStringList("blocked-commands");
