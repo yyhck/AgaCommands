@@ -70,6 +70,7 @@ messages:
     - "&8 ➡ &f/agacommands <comando> <atalho> &8- &7Cria um atalho."
     - ""
 
+# Formato: NOVO_ATALHO: COMANDO_ORIGINAL
 aliases:
   voar: fly
   lobby: server lobby

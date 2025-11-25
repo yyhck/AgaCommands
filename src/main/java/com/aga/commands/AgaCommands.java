@@ -18,8 +18,11 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -44,9 +47,9 @@ public class AgaCommands extends Plugin {
 
     private void sendConsoleLogo() {
         String border = "&a&l========================================";
-        String title  = "&f      AgaCommands &e(Proxy) &a&lATIVADO";
-        String author = "&f      Autor: &a&l" + getDescription().getAuthor();
-        String ver    = "&f      Versao: &a&l" + getDescription().getVersion();
+        String title  = "&7      AgaCommands &8(Proxy) &a&lATIVADO";
+        String author = "&7      Autor: &f" + getDescription().getAuthor();
+        String ver    = "&7      Versao: &f" + getDescription().getVersion();
 
         CommandSender console = getProxy().getConsole();
         console.sendMessage(new TextComponent(ChatColor.translateAlternateColorCodes('&', border)));
@@ -67,11 +70,15 @@ public class AgaCommands extends Plugin {
         getProxy().getPluginManager().unregisterCommands(this);
 
         registerAdminCommand();
-        loadAliasesFromConfig();
+
+        int count = loadAliasesFromConfig();
 
         if (sender != null) {
             String msg = config.getString("messages.reload", "&a[AgaCommands] Plugin recarregado!");
             sender.sendMessage(new TextComponent(ChatColor.translateAlternateColorCodes('&', msg)));
+            sender.sendMessage(new TextComponent(ChatColor.GRAY + "Carregados " + count + " atalhos."));
+        } else {
+            getLogger().info("Carregados " + count + " atalhos da config.");
         }
     }
 
@@ -93,6 +100,7 @@ public class AgaCommands extends Plugin {
         try {
             config = ConfigurationProvider.getProvider(YamlConfiguration.class).load(configFile);
         } catch (IOException e) {
+            getLogger().severe("ERRO AO CARREGAR CONFIG.YML! Verifique a sintaxe.");
             e.printStackTrace();
         }
     }
@@ -103,25 +111,20 @@ public class AgaCommands extends Plugin {
             try {
                 logFile.createNewFile();
             } catch (IOException e) {
-                getLogger().warning("Nao foi possivel criar o arquivo de log.");
+                getLogger().warning("Não foi possível criar o arquivo de log.");
             }
         }
     }
 
-    /**
-     * Log Assíncrono para otimização
-     */
     public void logBlockedCommand(String playerName, String command) {
         if (logFile == null) return;
 
         getProxy().getScheduler().runAsync(this, () -> {
             try (FileWriter fw = new FileWriter(logFile, true);
                  PrintWriter pw = new PrintWriter(fw)) {
-
                 SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
                 String date = sdf.format(new Date());
                 pw.println(playerName + ": " + command + " - " + date);
-
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -157,18 +160,62 @@ public class AgaCommands extends Plugin {
         getProxy().getPluginManager().registerCommand(this, new AdminCommand(this, mainName, aliases));
     }
 
-    private void loadAliasesFromConfig() {
+    private int loadAliasesFromConfig() {
         Configuration section = config.getSection("aliases");
-        if (section == null) return;
+        if (section == null) return 0;
 
+        int count = 0;
         for (String alias : section.getKeys()) {
             String target = section.getString(alias);
             getProxy().getPluginManager().registerCommand(this, new AliasCommand(alias, target));
+            count++;
         }
+        return count;
     }
 
     public void addAliasToConfig(String alias, String target) {
-        config.set("aliases." + alias, target);
-        saveConfig();
+        Path path = configFile.toPath();
+        try {
+            List<String> lines = Files.readAllLines(path, StandardCharsets.UTF_8);
+
+            int aliasesLineIndex = -1;
+            int insertionIndex = -1;
+
+            for (int i = 0; i < lines.size(); i++) {
+                if (lines.get(i).trim().equals("aliases:")) {
+                    aliasesLineIndex = i;
+                    break;
+                }
+            }
+
+            if (aliasesLineIndex != -1) {
+                insertionIndex = aliasesLineIndex + 1;
+
+                for (int i = aliasesLineIndex + 1; i < lines.size(); i++) {
+                    String line = lines.get(i);
+
+                    if (line.startsWith("  ") || (line.trim().startsWith("#") && line.startsWith("  "))) {
+                        insertionIndex = i + 1;
+                    }
+
+                    else if (!line.trim().isEmpty() && !line.startsWith(" ")) {
+                        break;
+                    }
+                }
+
+                lines.add(insertionIndex, "  " + alias + ": " + target);
+            } else {
+                lines.add("aliases:");
+                lines.add("  " + alias + ": " + target);
+            }
+
+            Files.write(path, lines, StandardCharsets.UTF_8);
+
+            loadConfig();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            getLogger().severe("Erro ao salvar o novo alias no arquivo config.yml preservando comentarios.");
+        }
     }
 }
