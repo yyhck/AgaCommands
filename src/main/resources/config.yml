@@ -1,0 +1,46 @@
+# AgaCommands - Configuração
+
+# Aliases para o comando principal
+main-command-aliases:
+  - agacommands
+  - hcommands
+
+messages:
+  reload: "&a&l[AgaCommands] &fConfiguração recarregada com sucesso!"
+  blocked-command: "&c&lERRO! &fComando desconhecido ou inexistente."
+  no-permission: "&c&lERRO! &fVocê não tem permissão para gerenciar o AgaCommands."
+
+  help:
+    - "&e&m--------------------------------"
+    - "&6&lAgaCommands &f- &7Ajuda"
+    - ""
+    - "&f/aga reload &7- Recarrega a configuração."
+    - "&f/aga <comando> <atalho> &7- Cria um atalho."
+    - ""
+    - "&e&m--------------------------------"
+
+aliases:
+  voar: fly
+  lobby: server lobby
+
+blocked-commands:
+  - "/pl"
+  - "/plugins"
+  - "/ver"
+  - "/version"
+  - "/about"
+
+# Sistema de Anti-Tab
+tab-settings:
+  enabled: true
+
+  # Lista de comandos onde o TAB será PERMITIDO (Whitelist)
+  # Coloque apenas o início do comando.
+  allowed-commands:
+    - "/tpa"
+    - "/tpaccept"
+    - "/tell"
+    - "/msg"
+    - "/g"
+    - "/l"
+    - "/money"

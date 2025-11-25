@@ -1,0 +1,9 @@
+name: AgaCommands
+version: 1.0
+main: com.aga.commands.AgaCommands
+author: yyHcK
+description: Gerenciador de aliases/bloqueios em Proxy.
+permissions:
+  agacommands.admin:
+    description: Permissão administrativa.
+    default: op
