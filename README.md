@@ -58,7 +58,7 @@ main-command-aliases:
   - hcommands
 
 messages:
-  reload: "&fAga&bCommands &8- &fConfiguração recarregada com sucesso!"
+  reload: "&fAga&bCommands &8- &aConfiguração recarregada com sucesso!"
   blocked-command: "&cComando desconhecido ou inexistente."
   no-permission: "&cVocê não tem permissão para fazer isso."
 
